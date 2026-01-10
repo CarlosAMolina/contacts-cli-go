@@ -9,7 +9,7 @@ func processTerm(data Data, searchTerm string) {
 	matchedContacts := searchContacts(searchTerm, data.Contacts)
 	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedContacts), searchTerm)
 	for _, contact := range matchedContacts {
-		contactDetails := getContactByID(contact.ID, data.Contacts)
+		contactDetails := getSummary(contact)
 		for _, detail := range contactDetails {
 			fmt.Println(detail)
 		}

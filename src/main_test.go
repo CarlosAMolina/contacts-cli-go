@@ -49,7 +49,7 @@ func TestSearchContacts(t *testing.T) {
 	}
 }
 
-func TestGetContactByID(t *testing.T) {
+func TestGetSummary(t *testing.T) {
 	jsonFile, err := os.ReadFile("fake.json")
 	if err != nil {
 		t.Fatalf("Failed to read fake.json: %v", err)
@@ -89,9 +89,16 @@ func TestGetContactByID(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("ID_%d", tc.id), func(t *testing.T) {
-			result := getContactByID(tc.id, data.Contacts)
+			contact, err := getConcatById(tc.id, data.Contacts)
+			if err != nil {
+				if tc.expectedResult == nil {
+					return // Expected error
+				}
+				t.Errorf("getConcatById(%d) returned an error: %v", tc.id, err)
+			}
+			result := getSummary(*contact)
 			if !reflect.DeepEqual(result, tc.expectedResult) {
-				t.Errorf("getContactByID(%d) = %v, want %v", tc.id, result, tc.expectedResult)
+				t.Errorf("getSummary(%d) = %v, want %v", tc.id, result, tc.expectedResult)
 			}
 		})
 	}
