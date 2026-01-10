@@ -22,12 +22,13 @@ func TestSearchContacts(t *testing.T) {
 		term        string
 		expectedIDs []int
 	}{
-		{"foo", []int{1}},
-		{"bar", []int{1}},
+		{"FOO", []int{1}},
+		{"BAR", []int{1}},
 		{"John", []int{1}},
 		{"Peter", []int{2}},
 		{"university", []int{1}},
 		{"nonexistent", []int{}},
+		{"234", []int{1, 2}},
 	}
 
 	for _, tc := range testCases {
