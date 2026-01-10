@@ -6,10 +6,10 @@ import (
 )
 
 func processTerm(data Data, searchTerm string) {
-	matchedIDs := searchContacts(searchTerm, data)
-	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedIDs), searchTerm)
-	for _, id := range matchedIDs {
-		contactDetails := getContactByID(id, data)
+	matchedContacts := searchContacts(searchTerm, data.Contacts)
+	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedContacts), searchTerm)
+	for _, contact := range matchedContacts {
+		contactDetails := getContactByID(contact.ID, data.Contacts)
 		for _, detail := range contactDetails {
 			fmt.Println(detail)
 		}

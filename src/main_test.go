@@ -34,7 +34,11 @@ func TestSearchContacts(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.term, func(t *testing.T) {
-			matchedIDs := searchContacts(tc.term, data)
+			matchedContacts := searchContacts(tc.term, data.Contacts)
+			var matchedIDs []int
+			for _, contact := range matchedContacts {
+				matchedIDs = append(matchedIDs, contact.ID)
+			}
 			if len(matchedIDs) == 0 && len(tc.expectedIDs) == 0 {
 				return
 			}
@@ -85,7 +89,7 @@ func TestGetContactByID(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("ID_%d", tc.id), func(t *testing.T) {
-			result := getContactByID(tc.id, data)
+			result := getContactByID(tc.id, data.Contacts)
 			if !reflect.DeepEqual(result, tc.expectedResult) {
 				t.Errorf("getContactByID(%d) = %v, want %v", tc.id, result, tc.expectedResult)
 			}

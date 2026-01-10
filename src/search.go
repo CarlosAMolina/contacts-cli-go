@@ -6,14 +6,14 @@ import (
 	"strings"
 )
 
-func searchContacts(term string, data Data) []int {
-	var matchedIDs []int
-	for _, contact := range data.Contacts {
+func searchContacts(term string, contacts []Contact) []Contact {
+	var matchedContacts []Contact
+	for _, contact := range contacts {
 		if searchInValue(reflect.ValueOf(contact), term) {
-			matchedIDs = append(matchedIDs, contact.ID)
+			matchedContacts = append(matchedContacts, contact)
 		}
 	}
-	return matchedIDs
+	return matchedContacts
 }
 
 func searchInValue(v reflect.Value, term string) bool {
@@ -44,9 +44,9 @@ func searchInValue(v reflect.Value, term string) bool {
 	return false
 }
 
-func getContactByID(id int, data Data) []string {
+func getContactByID(id int, contacts []Contact) []string {
 	var result []string
-	for _, contact := range data.Contacts {
+	for _, contact := range contacts {
 		if contact.ID == id {
 			name := contact.Name
 			if contact.Surname != "" {
