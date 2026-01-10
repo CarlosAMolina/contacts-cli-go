@@ -89,12 +89,12 @@ func TestGetSummary(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("ID_%d", tc.id), func(t *testing.T) {
-			contact, err := getConcatById(tc.id, data.Contacts)
+			contact, err := searchContactById(tc.id, data.Contacts)
 			if err != nil {
 				if tc.expectedResult == nil {
 					return // Expected error
 				}
-				t.Errorf("getConcatById(%d) returned an error: %v", tc.id, err)
+				t.Errorf("searchContactById(%d) returned an error: %v", tc.id, err)
 			}
 			result := getSummary(*contact)
 			if !reflect.DeepEqual(result, tc.expectedResult) {

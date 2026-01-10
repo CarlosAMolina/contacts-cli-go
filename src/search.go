@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func getConcatById(id int, contacts []Contact) (*Contact, error) {
+func searchContactById(id int, contacts []Contact) (*Contact, error) {
 	for _, contact := range contacts {
 		if contact.ID == id {
 			return &contact, nil
