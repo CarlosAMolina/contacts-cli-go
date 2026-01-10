@@ -14,7 +14,10 @@ func main() {
 
 	searchTerm := os.Args[1]
 
-	jsonFile, err := os.ReadFile("src/fake.json")
+	const jsonPath = "src/fake.json"
+	//const jsonPath= "/tmp/contacts.json"
+
+	jsonFile, err := os.ReadFile(jsonPath)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
