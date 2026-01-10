@@ -1,11 +1,11 @@
+test: fmt
+	go test ./src/...
+
 fmt:
-	go fmt ./src/
+	go fmt ./src/...
 
 run:
-	go run src/main.go
-
-test:
-	go test ./src/
+	go run src/main.go src/types.go
 
 tidy:
 	go mod tidy
