@@ -60,7 +60,7 @@ func TestGetContactByID(t *testing.T) {
 		id             int
 		expectedResult []string
 	}{
-		{1, []string{"123456789 John. Johnny, JD. University, friend. ID 1", "123123123 John. Johnny, JD. University, friend. ID 1"}},
+		{1, []string{"123456789 John Doe. Johnny, JD. University, friend. ID 1", "123123123 John Doe. Johnny, JD. University, friend. ID 1"}},
 		{2, []string{"123456789 Peter. ID 2"}},
 		{3, nil},
 	}
