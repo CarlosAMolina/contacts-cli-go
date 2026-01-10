@@ -5,7 +5,7 @@ fmt:
 	go fmt ./src/...
 
 run:
-	go run ./src/ 234
+	go run ./src/ src/fake.json 234
 
 tidy:
 	go mod tidy
