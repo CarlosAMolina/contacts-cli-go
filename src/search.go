@@ -6,6 +6,16 @@ import (
 	"strings"
 )
 
+func searchContacts(term string, data Data) []int {
+	var matchedIDs []int
+	for _, contact := range data.Contacts {
+		if searchInValue(reflect.ValueOf(contact), term) {
+			matchedIDs = append(matchedIDs, contact.ID)
+		}
+	}
+	return matchedIDs
+}
+
 func searchInValue(v reflect.Value, term string) bool {
 	switch v.Kind() {
 	case reflect.String:
@@ -32,14 +42,4 @@ func searchInValue(v reflect.Value, term string) bool {
 		}
 	}
 	return false
-}
-
-func searchContacts(term string, data Data) []int {
-	var matchedIDs []int
-	for _, contact := range data.Contacts {
-		if searchInValue(reflect.ValueOf(contact), term) {
-			matchedIDs = append(matchedIDs, contact.ID)
-		}
-	}
-	return matchedIDs
 }
