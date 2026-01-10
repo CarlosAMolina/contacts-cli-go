@@ -1,3 +1,6 @@
+build:
+	go build -o contacts-cli-go ./src
+
 test: fmt
 	go test ./src/...
 
