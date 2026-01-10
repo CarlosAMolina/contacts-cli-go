@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"reflect"
 	"testing"
@@ -39,6 +40,36 @@ func TestSearchContacts(t *testing.T) {
 			}
 			if !reflect.DeepEqual(matchedIDs, tc.expectedIDs) {
 				t.Errorf("searchContacts(%q) = %v, want %v", tc.term, matchedIDs, tc.expectedIDs)
+			}
+		})
+	}
+}
+
+func TestGetContactByID(t *testing.T) {
+	jsonFile, err := os.ReadFile("fake.json")
+	if err != nil {
+		t.Fatalf("Failed to read fake.json: %v", err)
+	}
+
+	var data Data
+	if err := json.Unmarshal(jsonFile, &data); err != nil {
+		t.Fatalf("Failed to unmarshal fake.json: %v", err)
+	}
+
+	testCases := []struct {
+		id             int
+		expectedResult []string
+	}{
+		{1, []string{"123456789 John. ID 1", "123123123 John. ID 1"}},
+		{2, []string{"123456789 Peter. ID 2"}},
+		{3, nil},
+	}
+
+	for _, tc := range testCases {
+		t.Run(fmt.Sprintf("ID_%d", tc.id), func(t *testing.T) {
+			result := getContactByID(tc.id, data)
+			if !reflect.DeepEqual(result, tc.expectedResult) {
+				t.Errorf("getContactByID(%d) = %v, want %v", tc.id, result, tc.expectedResult)
 			}
 		})
 	}
