@@ -3,23 +3,23 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"reflect"
 	"strings"
 )
 
 type Contact struct {
-	ID              int             `json:"id"`
-	Addresses       []string        `json:"addresses"`
-	Categories      []string        `json:"categories"`
-	Emails          []string        `json:"emails"`
-	Name            string          `json:"name"`
-	Nicknames       []string        `json:"nicknames"`
-	Note            string          `json:"note"`
-	Phones          []Phone         `json:"phones"`
-	SocialNetwork   SocialNetwork   `json:"socialNetwork"`
-	Surname         string          `json:"surname"`
-	Urls            []string        `json:"urls"`
+	ID            int           `json:"id"`
+	Addresses     []string      `json:"addresses"`
+	Categories    []string      `json:"categories"`
+	Emails        []string      `json:"emails"`
+	Name          string        `json:"name"`
+	Nicknames     []string      `json:"nicknames"`
+	Note          string        `json:"note"`
+	Phones        []Phone       `json:"phones"`
+	SocialNetwork SocialNetwork `json:"socialNetwork"`
+	Surname       string        `json:"surname"`
+	Urls          []string      `json:"urls"`
 }
 
 type Phone struct {
@@ -28,23 +28,23 @@ type Phone struct {
 }
 
 type SocialNetwork struct {
-	DiscordAccounts   []Discord   `json:"discordAccounts"`
-	FacebookAccounts  []string    `json:"facebookAccounts"`
-	GithubAccounts    []string    `json:"githubAccounts"`
-	InstagramAccounts []string    `json:"instagramAccounts"`
-	LinkedinAccounts  []string    `json:"linkedinAccounts"`
-	TelegramAccounts  []string    `json:"telegramAccounts"`
-	TiktokAccounts    []string    `json:"tiktokAccounts"`
-	TwitterAccounts   []string    `json:"twitterAccounts"`
-	WallapopAccounts  []Wallapop  `json:"wallapopAccounts"`
+	DiscordAccounts   []Discord  `json:"discordAccounts"`
+	FacebookAccounts  []string   `json:"facebookAccounts"`
+	GithubAccounts    []string   `json:"githubAccounts"`
+	InstagramAccounts []string   `json:"instagramAccounts"`
+	LinkedinAccounts  []string   `json:"linkedinAccounts"`
+	TelegramAccounts  []string   `json:"telegramAccounts"`
+	TiktokAccounts    []string   `json:"tiktokAccounts"`
+	TwitterAccounts   []string   `json:"twitterAccounts"`
+	WallapopAccounts  []Wallapop `json:"wallapopAccounts"`
 }
 
 type Discord struct {
-	Alias         string `json:"alias"`
-	Discriminator int    `json:"discriminator"`
-	GlobalName    string `json:"globalName"`
+	Alias          string `json:"alias"`
+	Discriminator  int    `json:"discriminator"`
+	GlobalName     string `json:"globalName"`
 	LegacyUserName string `json:"legacyUserName"`
-	UserName      string `json:"userName"`
+	UserName       string `json:"userName"`
 }
 
 type Wallapop struct {
@@ -61,7 +61,7 @@ func searchInValue(v reflect.Value, term string) bool {
 	case reflect.String:
 		return strings.Contains(strings.ToLower(v.String()), strings.ToLower(term))
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-        return strings.Contains(strings.ToLower(fmt.Sprintf("%d", v.Int())), strings.ToLower(term))
+		return strings.Contains(strings.ToLower(fmt.Sprintf("%d", v.Int())), strings.ToLower(term))
 	case reflect.Struct:
 		for i := 0; i < v.NumField(); i++ {
 			if searchInValue(v.Field(i), term) {
@@ -95,7 +95,7 @@ func searchContacts(term string, data Data) []int {
 }
 
 func main() {
-	jsonFile, err := ioutil.ReadFile("src/fake.json")
+	jsonFile, err := os.ReadFile("src/fake.json")
 	if err != nil {
 		fmt.Println(err)
 	}

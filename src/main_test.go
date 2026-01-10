@@ -2,13 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"reflect"
 	"testing"
 )
 
 func TestSearchContacts(t *testing.T) {
-	jsonFile, err := ioutil.ReadFile("fake.json")
+	jsonFile, err := os.ReadFile("fake.json")
 	if err != nil {
 		t.Fatalf("Failed to read fake.json: %v", err)
 	}
@@ -19,8 +19,8 @@ func TestSearchContacts(t *testing.T) {
 	}
 
 	testCases := []struct {
-		term         string
-		expectedIDs  []int
+		term        string
+		expectedIDs []int
 	}{
 		{"foo", []int{1}},
 		{"bar", []int{1}},
