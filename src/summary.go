@@ -5,6 +5,15 @@ import (
 	"strings"
 )
 
+func showSummary(contacts []Contact) {
+	for _, contact := range contacts {
+		contactDetails := getSummary(contact)
+		for _, detail := range contactDetails {
+			fmt.Println(detail)
+		}
+	}
+}
+
 func getSummary(contact Contact) []string {
 	var result []string
 	name := contact.Name

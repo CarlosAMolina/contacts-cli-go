@@ -25,8 +25,6 @@ func searchContacts(term string, contacts []Contact) []Contact {
 	return matchedContacts
 }
 
-
-
 func searchInValue(v reflect.Value, term string) bool {
 	switch v.Kind() {
 	case reflect.String:

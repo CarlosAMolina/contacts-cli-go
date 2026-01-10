@@ -5,15 +5,15 @@ import (
 	"os"
 )
 
+func processAll(data Data) {
+	fmt.Printf("Number of contacts: %d\n", len(data.Contacts))
+	showSummary(data.Contacts)
+}
+
 func processTerm(data Data, searchTerm string) {
 	matchedContacts := searchContacts(searchTerm, data.Contacts)
 	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedContacts), searchTerm)
-	for _, contact := range matchedContacts {
-		contactDetails := getSummary(contact)
-		for _, detail := range contactDetails {
-			fmt.Println(detail)
-		}
-	}
+	showSummary(matchedContacts)
 }
 
 func main() {
@@ -24,8 +24,10 @@ func main() {
 	}
 
 	jsonPath := os.Args[1]
-	searchTerm := os.Args[2]
 
 	var data Data = getData(jsonPath)
+	processAll(data)
+
+	searchTerm := os.Args[2]
 	processTerm(data, searchTerm)
 }
