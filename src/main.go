@@ -107,7 +107,3 @@ func main() {
 	matchedIDs := searchContacts(searchTerm, data)
 	fmt.Printf("Contacts matching '%s': %v\n", searchTerm, matchedIDs)
 }
-
-func HelloWorld() string {
-	return "Hello, World!"
-}
