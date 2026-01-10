@@ -28,5 +28,12 @@ func main() {
 	}
 
 	matchedIDs := searchContacts(searchTerm, data)
-	fmt.Printf("Contacts matching '%s': %v\n", searchTerm, matchedIDs)
+	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedIDs), searchTerm)
+
+	for _, id := range matchedIDs {
+		contactDetails := getContactByID(id, data)
+		for _, detail := range contactDetails {
+			fmt.Println(detail)
+		}
+	}
 }
