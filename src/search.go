@@ -54,7 +54,9 @@ func getContactByID(id int, data Data) []string {
 			}
 			categoriesStr := ""
 			if len(contact.Categories) > 0 {
-				categoriesStr = ". " + strings.Join(contact.Categories, ", ")
+				categoriesStr = strings.Join(contact.Categories, ", ")
+				categoriesStr = strings.ToUpper(string(categoriesStr[0])) + categoriesStr[1:]
+				categoriesStr = ". " + categoriesStr
 			}
 			for _, phone := range contact.Phones {
 				result = append(result, fmt.Sprintf("%s %s%s%s. ID %d", phone.Number, contact.Name, nicknamesStr, categoriesStr, contact.ID))
