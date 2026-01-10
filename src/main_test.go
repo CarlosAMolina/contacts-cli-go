@@ -63,7 +63,25 @@ func TestGetContactByID(t *testing.T) {
 		{1, []string{"123456789 (Personal) John Doe. Johnny, JD. University, friend. ID 1", "123123123 (Work) John Doe. Johnny, JD. University, friend. ID 1"}},
 		{2, []string{"123456789 Peter. ID 2"}},
 		{3, nil},
+		{4, []string{"111222333 Jane. Friend. ID 4"}},
 	}
+
+	onlySomeFieldsContact := Contact{
+		ID:         4,
+		Name:       "Jane",
+		Categories: []string{"friend"},
+		Phones: []Phone{
+			{Number: "111222333"},
+		},
+		Addresses:     []string{},
+		Emails:        []string{},
+		Nicknames:     []string{},
+		Note:          "",
+		SocialNetwork: SocialNetwork{},
+		Surname:       "",
+		Urls:          []string{},
+	}
+	data.Contacts = append(data.Contacts, onlySomeFieldsContact)
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("ID_%d", tc.id), func(t *testing.T) {

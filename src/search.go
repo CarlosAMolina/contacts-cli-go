@@ -53,7 +53,7 @@ func getContactByID(id int, data Data) []string {
 				name = name + " " + contact.Surname
 			}
 			nicknamesStr := ""
-			if len(contact.Categories) > 0 {
+			if len(contact.Nicknames) > 0 {
 				nicknamesStr = ". " + strings.Join(contact.Nicknames, ", ")
 			}
 			categoriesStr := ""
