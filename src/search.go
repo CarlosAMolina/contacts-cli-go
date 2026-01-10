@@ -48,12 +48,16 @@ func getContactByID(id int, data Data) []string {
 	var result []string
 	for _, contact := range data.Contacts {
 		if contact.ID == id {
+			nicknamesStr := ""
+			if len(contact.Categories) > 0 {
+				nicknamesStr = ". " + strings.Join(contact.Nicknames, ", ") + "."
+			}
 			categoriesStr := ""
 			if len(contact.Categories) > 0 {
 				categoriesStr = " (" + strings.Join(contact.Categories, ", ") + ")"
 			}
 			for _, phone := range contact.Phones {
-				result = append(result, fmt.Sprintf("%s %s%s. ID %d", phone.Number, contact.Name, categoriesStr, contact.ID))
+				result = append(result, fmt.Sprintf("%s %s%s%s. ID %d", phone.Number, contact.Name, nicknamesStr, categoriesStr, contact.ID))
 			}
 			break
 		}
