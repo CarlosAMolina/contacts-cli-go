@@ -5,6 +5,17 @@ import (
 	"os"
 )
 
+func processTerm(data Data, searchTerm string) {
+	matchedIDs := searchContacts(searchTerm, data)
+	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedIDs), searchTerm)
+	for _, id := range matchedIDs {
+		contactDetails := getContactByID(id, data)
+		for _, detail := range contactDetails {
+			fmt.Println(detail)
+		}
+	}
+}
+
 func main() {
 	if len(os.Args) < 3 {
 		fmt.Println("Usage: go run main.go <jsonPath> <searchTerm>")
@@ -14,14 +25,7 @@ func main() {
 
 	jsonPath := os.Args[1]
 	searchTerm := os.Args[2]
-	var data Data = getData(jsonPath)
 
-	matchedIDs := searchContacts(searchTerm, data)
-	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedIDs), searchTerm)
-	for _, id := range matchedIDs {
-		contactDetails := getContactByID(id, data)
-		for _, detail := range contactDetails {
-			fmt.Println(detail)
-		}
-	}
+	var data Data = getData(jsonPath)
+	processTerm(data, searchTerm)
 }
