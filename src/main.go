@@ -14,7 +14,7 @@ func main() {
 
 	jsonPath := os.Args[1]
 
-	var data Data = getData(jsonPath)
+	var data Data = readFile(jsonPath)
 	processAll(data)
 
 	searchTerm := os.Args[2]

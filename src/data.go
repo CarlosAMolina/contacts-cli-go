@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func getData(path string) Data {
+func readFile(path string) Data {
 	jsonFile, err := os.ReadFile(path)
 	if err != nil {
 		fmt.Println(err)
