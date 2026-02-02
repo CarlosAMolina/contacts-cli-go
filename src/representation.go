@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 )
@@ -12,6 +13,19 @@ func showSummary(contacts []Contact) {
 			fmt.Println(detail)
 		}
 	}
+}
+
+// TODO show pretty contact info (drop nulls, not json, etc)
+func showContact(contactId int, contacts []Contact) {
+	contact, err := searchContactById(contactId, contacts)
+	if err != nil {
+		panic(err)
+	}
+	prettyJSON, err := json.MarshalIndent(contact, "", "    ")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(prettyJSON))
 }
 
 func getSummary(contact Contact) []string {

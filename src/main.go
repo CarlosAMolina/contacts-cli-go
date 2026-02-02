@@ -19,6 +19,8 @@ func main() {
 
 	searchTerm := os.Args[2]
 	processTerm(data, searchTerm)
+
+	showContact(1, data.Contacts)
 }
 
 func processAll(data Data) {
@@ -31,4 +33,3 @@ func processTerm(data Data, searchTerm string) {
 	fmt.Printf("Found %d contacts matching '%s'\n", len(matchedContacts), searchTerm)
 	showSummary(matchedContacts)
 }
-

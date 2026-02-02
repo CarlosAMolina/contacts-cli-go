@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// TODO contacts as pointer (*)
 func searchContactById(id int, contacts []Contact) (*Contact, error) {
 	for _, contact := range contacts {
 		if contact.ID == id {
