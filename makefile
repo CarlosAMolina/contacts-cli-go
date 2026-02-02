@@ -7,6 +7,9 @@ fmt:
 run:
 	go run ./src/ src/fake.json 234
 
+send:
+	scp cmoli-es-deploy dev:~/Software/
+
 test: fmt
 	go test ./src/...
 
